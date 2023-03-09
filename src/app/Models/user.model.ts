@@ -1,9 +1,8 @@
 export interface User
 {
-    firstName: string;
-	lastName: string;
-    phone: Number;
-    email: string;
-    Time : number;
-    date : Date;
+    firstName: string | any;
+	lastName: string | any;
+    phone: Number | any;
+    Time : Number | any;
+    date : string | any;
 }
