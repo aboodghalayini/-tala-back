@@ -28,7 +28,7 @@ userCollection : AngularFirestoreCollection <User>;
     }); 
   }
   delete(user: User) {
-    this.afs.collection('one').doc(user.phone.value).delete().then(() => {
+    this.afs.collection('one').doc(user.id).delete().then(() => {
       console.log("Document successfully deleted!");
     }).catch((error) => {
       console.error("Error removing document: ", error);

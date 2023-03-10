@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/Models/user.model';
 import { DataService } from 'src/app/Services/data.service';
@@ -10,6 +10,7 @@ import { duplicateNameValidator } from 'src/app/shared/duplicateNameValidator';
 })
 export class LandingComponent implements OnInit {
   user :User ={
+    id : '',
     firstName: '',
     lastName: '',
     phone: '',
@@ -17,7 +18,7 @@ export class LandingComponent implements OnInit {
     date: '',
   } ;
   errors: any = [];
-
+  selectedDate ?: string;
   constructor( private afs: AngularFirestore , private data : DataService) { }
     profileForm = new FormGroup({
       firstName: new FormControl('', [
@@ -36,19 +37,15 @@ export class LandingComponent implements OnInit {
       time: new FormControl('', [
         Validators.required,
       ]),
-      date: new FormControl('', [
-        // Validators.required,
+      userDate: new FormControl('', [
+        Validators.required,
       ]),
       
     },
     
     { validators: duplicateNameValidator });
   ngOnInit() {
-    this.user.firstName=this.profileForm.get('firstName')?.value;
-    this.user.lastName=this.profileForm.get('lastName')?.value;
-    this.user.phone=this.profileForm.get('phone')?.value;
-    this.user.date="asvasvsdv";
-    
+    this.selectedDate = new Date().toISOString().split('T')[0];
   }
   getSelectedValue(value :any){
     this.user.Time=value;
@@ -57,9 +54,9 @@ export class LandingComponent implements OnInit {
     this.user.firstName=this.profileForm.get('firstName')?.value;
     this.user.lastName=this.profileForm.get('lastName')?.value;
     this.user.phone=this.profileForm.get('phone')?.value;
-    this.user.date="asvasvsdv";
-    console.log(this.profileForm.get('firstName')?.value);
+    this.user.date=this.selectedDate;
+    if(window.confirm("انت بحاجة الى دفع عربون لتاكيد الحجز اما عن طريق حوالة بنكية انت كنت من اهل نابلس بامكانك التواصل معنا لدفع العربون نقدا وشكرا")){
     this.data.addusers(this.user);
-    this.profileForm.reset();
+    this.profileForm.reset();}
     }
 }

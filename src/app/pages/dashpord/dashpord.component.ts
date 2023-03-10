@@ -24,8 +24,9 @@ export class DashpordComponent {
     })
   }
   delet(user: User){
-    if(window.confirm('Are you sure you want to delete ' + user.firstName + ' ? ')) {
-      this.Data.delete(user)
+    if(window.confirm('هل انت متاكد بالغاء الحجز ل ' + user.firstName + ' ? ')) {
+      this.Data.delete(user);
+      console.log(user.id);
     }
     this.getdata();
   }

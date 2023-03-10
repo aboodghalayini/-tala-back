@@ -307,7 +307,16 @@
                     <h6 >يرجى التاكد من البيانات المدخلة</h6>
                   </div>
                 </div>
-                <div class="col-auto my-1">
+                <div class="mb-3">
+                  <label for="dates">التاريخ</label>
+                  <input type="date" class="form-control"
+                  id="dates"
+                  name="dates"
+                  formControlName="userDate"
+                  [(ngModel)]="selectedDate"
+                  placeholder="تاريخ الحجز" required>
+                </div>
+                <div class="mb-3">
                   <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الوقت</label>
                   <select #time class="custom-select mr-sm-2" id="time" name="time" formControlName="time" (change)="getSelectedValue(time.value)">
                     <option value="12">12 ساعة</option>
