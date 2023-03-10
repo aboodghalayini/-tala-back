@@ -2,25 +2,29 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './Component/home/home.component';
-import { LocationComponent } from './Component/location/location.component';
-import { FormComponent } from './Component/form/form.component';
-import { DashboardComponent } from './Component/dashboard/dashboard.component';
-import { ContactUsComponent } from './Component/contact-us/contact-us.component';
+import { firebaseConfig } from 'src/environment/environment';
+import {AngularFireModule} from '@angular/fire/compat';
+import { LandingComponent } from './pages/landing/landing.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DashpordComponent } from './pages/dashpord/dashpord.component';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LocationComponent,
-    FormComponent,
-    DashboardComponent,
-    ContactUsComponent
+    LandingComponent,
+    DashpordComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, 
+    AngularFireModule.initializeApp(firebaseConfig.firebase),
+    ReactiveFormsModule,
+    DateValueAccessorModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

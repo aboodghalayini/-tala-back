@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContactUsComponent } from './Component/contact-us/contact-us.component';
-import { FormComponent } from './Component/form/form.component';
-import { HomeComponent } from './Component/home/home.component';
-import { LocationComponent } from './Component/location/location.component';
+import { DashpordComponent } from './pages/dashpord/dashpord.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
-  { path: 'location', component: LocationComponent},
-  { path: 'Register', component: FormComponent},
-  { path: 'contact-us', component: ContactUsComponent},
+  { path: "", redirectTo: "landing", pathMatch: "full"},
+  { path: "landing", component: LandingComponent },
+  { path: "dashpord", component: DashpordComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,10 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
-{
+{ 
+    
+ 
   "compileOnSave": false,
   "compilerOptions": {
+    "skipLibCheck": true, 
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -29,5 +32,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+    
+  },
+ 
 }
