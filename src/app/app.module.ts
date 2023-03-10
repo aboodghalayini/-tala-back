@@ -7,6 +7,9 @@ import {AngularFireModule} from '@angular/fire/compat';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashpordComponent } from './pages/dashpord/dashpord.component';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,9 +20,11 @@ import { DashpordComponent } from './pages/dashpord/dashpord.component';
     BrowserModule,
     AppRoutingModule, 
     AngularFireModule.initializeApp(firebaseConfig.firebase),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DateValueAccessorModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
