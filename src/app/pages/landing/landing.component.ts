@@ -16,9 +16,12 @@ export class LandingComponent implements OnInit {
     phone: '',
     Time: '',
     date: '',
+    status: '',
   } ;
+  users: User[] = [];
   errors: any = [];
-  selectedDate ?: string;
+  selectedDate : string = '';
+  status : string | number = '' ;
   constructor( private afs: AngularFirestore , private data : DataService) { }
     profileForm = new FormGroup({
       firstName: new FormControl('', [
@@ -37,6 +40,9 @@ export class LandingComponent implements OnInit {
       time: new FormControl('', [
         Validators.required,
       ]),
+      status: new FormControl('', [
+        Validators.required,
+      ]),
       userDate: new FormControl('', [
         Validators.required,
       ]),
@@ -45,18 +51,48 @@ export class LandingComponent implements OnInit {
     
     { validators: duplicateNameValidator });
   ngOnInit() {
+    this.data.getAlluser().subscribe(res => {
+      this.users = res.map((e: any) => {
+        const data = e.payload.doc.data();
+        data.id = e.payload.doc.id;
+        return data
+      })
+    })
     this.selectedDate = new Date().toISOString().split('T')[0];
   }
   getSelectedValue(value :any){
     this.user.Time=value;
+  }
+  getSelectedValuestatus(value :any){
+    this.user.status=value;
   }
   onSubmit(){
     this.user.firstName=this.profileForm.get('firstName')?.value;
     this.user.lastName=this.profileForm.get('lastName')?.value;
     this.user.phone=this.profileForm.get('phone')?.value;
     this.user.date=this.selectedDate;
+    console.log(this.user.date);
+    console.log(this.users[2].date);
+    for (var i=0;i<this.users.length;i++){
+      console.log(i);
+       if (this.user.Time == 12){
+        if(this.users[i].date==this.user.date){
+          if(this.users[i].status==this.user.status){
+         window.confirm(" !هذا التاريخ محجوز اختر تاريخ اخر");
+         this.profileForm.reset();
+         return;
+       }
+      }
+    }
+     else if(this.users[i].date==this.user.date){
+       window.confirm(" !هذا التاريخ محجوز اختر تاريخ اخر");
+       this.profileForm.reset();
+       return;
+    }
+  }
     if(window.confirm("انت بحاجة الى دفع عربون لتاكيد الحجز اما عن طريق حوالة بنكية انت كنت من اهل نابلس بامكانك التواصل معنا لدفع العربون نقدا وشكرا")){
     this.data.addusers(this.user);
-    this.profileForm.reset();}
+    }
+    this.profileForm.reset();
     }
 }

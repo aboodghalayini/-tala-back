@@ -7,6 +7,7 @@
             <th scope="col">رقم الجوال</th>
             <th scope="col">الوقت</th>
             <th scope="col">التاريخ</th>
+            <th scope="col">الحالة</th>
             <th scope="col">حذف</th>
           </tr>
         </thead>
@@ -17,6 +18,8 @@
                 <td> {{item.phone}} </td>
                 <td> {{item.Time}} </td>
                 <td> {{item.date}} </td>
+                <td *ngIf="item.status == 0">صباحا </td>
+                <td *ngIf="item.status == 1">مسائا </td>
                 <td> <button class="btn btn btn-outline-danger" (click)="delet(item)">حذف</button> </td>
           <td>
         </tbody>

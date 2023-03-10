@@ -5,5 +5,6 @@ export interface User
 	lastName: string | any;
     phone: Number | any;
     Time : Number | any;
+    status: string | number;
     date : string | any;
 }

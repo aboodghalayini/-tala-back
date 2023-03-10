@@ -322,18 +322,31 @@
                     <option value="12">12 ساعة</option>
                     <option value="24">24 ساعة</option>
                   </select>
+                  </div>
+                  <div class="mb-3">
+                  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الحالة</label>
+                  <select #status class="custom-select mr-sm-2" id="status" name="status" formControlName="status" (change)="getSelectedValuestatus(status.value)">
+                    <option value="0">صباحا</option>
+                    <option value="1">مسائا</option>
+                  </select>
                 </div>
-                
-                <button class="btn btn-outline-success btn-lg btn-block badge-pill container "
+                <button class="btn btn-outline-success btn-lg btn-block badge-pill container mb-3"
                 type="submit" 
                 [disabled]="!profileForm.valid || profileForm.pristine">
-      حجز
-    </button>
+                       حجز
+                 </button>
+                 <div class="mb-3">
+                  <div class=" btn-group-toggle " data-toggle="buttons">
+                       <a class="btn bg-center btn-outline-success btn-lg btn-block badge-pill container mb-3" href="https://api.whatsapp.com/send?phone=%2B972599233271&data=AWDBn-2Q4Xwrrm5muGQkwo_17nd0H2t5A-bs2mitqO9XapT3miykPTGnDxg4DePt-O_RudZcPAJomKX4B9w0p-6NObaEEnhrx8qDk03F9GqobvWz1C-tqo-cjUnQu6_8wgoqcU5TBC9SdBy7lBt-zzYkcDMaXYV7quQozDoGZonV5UzTBxaqG7ezaE9JZZKZZRenFO-l88ecrvRApoQgG29OUEhK2BE_RKGEHP3PBUS3NkOGvD00U9_g9dbnLVcOG_w7YHjN_BRjIzOO6dRhGA&source=FB_Page&app=facebook&entry_point=page_cta&fbclid=IwAR0FjFiBYEiD5BpG3PiLn4vQmLvXf5AesSKgYWyioPzuoVpMF0PyYhMdV4U">Whatsapp</a>
+                       <a class="btn btn-outline-primary btn-lg btn-block badge-pill container mb-3" href="https://www.facebook.com/Villa.Tala.Beck">Facebook</a>
+                       <a class="btn btn-outline-danger btn-lg btn-block badge-pill container mb-3" href="https://www.instagram.com/villa_tala_beck/">instagram</a>
+                    </div>
+                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
+  </div>
   </section>
 </main>
