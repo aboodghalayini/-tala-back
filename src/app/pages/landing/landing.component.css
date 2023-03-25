@@ -1,0 +1,17 @@
+
+.nav-link {
+  font-size: 2.5rem;
+  color: black;
+}
+.nav-link i {
+  transition: color 0.5s;
+}
+.nav-link:hover i.fa-facebook-f {
+  color: #3b5998;
+}
+.nav-link:hover i.fa-instagram {
+  color: #ac2bac;
+}
+.nav-link:hover i.fa-whatsapp {
+  color: #25d366;
+}

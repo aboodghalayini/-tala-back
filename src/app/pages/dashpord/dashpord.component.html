@@ -1,7 +1,9 @@
 <div class="center m-5">
+  <button class="btn btn btn-outline-primary" (click)="addu()">اضافة</button> 
     <table class="table">
         <thead>
           <tr>
+            <th scope="col">دفع العربون</th>
             <th scope="col">الاسم الاول</th>
             <th scope="col">الاسم الثاني</th>
             <th scope="col">رقم الجوال</th>
@@ -9,10 +11,13 @@
             <th scope="col">التاريخ</th>
             <th scope="col">الحالة</th>
             <th scope="col">حذف</th>
+            <th scope="col">تم</th>
           </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of list">
+              <td *ngIf="item.done == true"> تم دفع العربون</td>
+              <td *ngIf="item.done == false">لم يدفع عربون </td>
                 <td>{{item.firstName}} </td> 
                 <td> {{item.lastName}} </td>
                 <td> {{item.phone}} </td>
@@ -21,7 +26,182 @@
                 <td *ngIf="item.status == 0">صباحا </td>
                 <td *ngIf="item.status == 1">مسائا </td>
                 <td> <button class="btn btn btn-outline-danger" (click)="delet(item)">حذف</button> </td>
+                <td><button class="btn btn-success btn-rounded" (click)="donedel(item)"> <i class="fas fa-check-square"></i></button></td>
           <td>
         </tbody>
       </table>
+      <section class="relative block py-24 lg:pt-0 " *ngIf="updatedata">
+        
+        <div class="flex-auto p-5 lg:p-10">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name"> الأسم الأول</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                formControlName="firstName"
+                placeholder="الأسم الأول"
+              />
+              <div
+                *ngIf="!user.firstName.valid && user.lastName.touched"
+                class="alert alert-danger"
+              >
+                <h6 *ngIf="user.firstName.errors?.['required']">this field is required</h6>
+                <h6 *ngIf="user.firstName.errors?.['minlength']">
+                  the name must be mor than 2 characters
+                </h6>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="lname">الإسم الأخير</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lname"
+                name="lname"
+                formControlName="lastName"
+                placeholder="الإسم الأخير"
+              />
+              <div *ngIf="!user.lastName.valid && user.lastName.touched" class="alert alert-danger">
+                <h6 > يرجى التاكد من البيانات المدخلة</h6>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="phone">رقم الهاتف</label>
+              <div class="input-group mb-2 mr-sm-2">
+              
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                formControlName="phone"
+                placeholder="رقم الهاتف"
+              />
+            </div>
+              <div *ngIf="!user.phone.valid && user.phone.touched" class="alert alert-danger">
+                <h6 >يرجى التاكد من البيانات المدخلة</h6>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="dates">التاريخ</label>
+              <input type="date" class="form-control"
+              id="dates"
+              name="dates"
+              formControlName="userDate"
+              [(ngModel)]="selectedDate"
+              placeholder="تاريخ الحجز" required>
+            </div>
+            <div class="mb-3">
+              <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الوقت</label>
+              <select #time class="custom-select mr-sm-2" id="time" name="time" formControlName="time" (change)="getSelectedValue(time.value)">
+                <option value="12">12 ساعة</option>
+                <option value="24">24 ساعة</option>
+              </select>
+              </div>
+              <div class="mb-3">
+              <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الحالة</label>
+              <select #status class="custom-select mr-sm-2" id="status" name="status" formControlName="status" (change)="getSelectedValuestatus(status.value)">
+                <option value="0">صباحا</option>
+                <option value="1">مسائا</option>
+              </select>
+            </div>
+            <button class="btn btn-outline-success btn-lg btn-block badge-pill container mb-3"
+            type="submit" 
+            [disabled]="!profileForm.valid || profileForm.pristine">
+                   حجز
+             </button>
+          </form>
+        </div>
+</section>
+      <section class="relative block py-24 lg:pt-0 " *ngIf="add">
+        
+                <div class="flex-auto p-5 lg:p-10">
+                  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                      <label for="name"> الأسم الأول</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        formControlName="firstName"
+                        placeholder="الأسم الأول"
+                      />
+                      <div
+                        *ngIf="!user.firstName.valid && user.lastName.touched"
+                        class="alert alert-danger"
+                      >
+                        <h6 *ngIf="user.firstName.errors?.['required']">this field is required</h6>
+                        <h6 *ngIf="user.firstName.errors?.['minlength']">
+                          the name must be mor than 2 characters
+                        </h6>
+                      </div>
+                    </div>
+    
+                    <div class="mb-3">
+                      <label for="lname">الإسم الأخير</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lname"
+                        name="lname"
+                        formControlName="lastName"
+                        placeholder="الإسم الأخير"
+                      />
+                      <div *ngIf="!user.lastName.valid && user.lastName.touched" class="alert alert-danger">
+                        <h6 > يرجى التاكد من البيانات المدخلة</h6>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="phone">رقم الهاتف</label>
+                      <div class="input-group mb-2 mr-sm-2">
+                      
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        name="phone"
+                        formControlName="phone"
+                        placeholder="رقم الهاتف"
+                      />
+                    </div>
+                      <div *ngIf="!user.phone.valid && user.phone.touched" class="alert alert-danger">
+                        <h6 >يرجى التاكد من البيانات المدخلة</h6>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="dates">التاريخ</label>
+                      <input type="date" class="form-control"
+                      id="dates"
+                      name="dates"
+                      formControlName="userDate"
+                      [(ngModel)]="selectedDate"
+                      placeholder="تاريخ الحجز" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الوقت</label>
+                      <select #time class="custom-select mr-sm-2" id="time" name="time" formControlName="time" (change)="getSelectedValue(time.value)">
+                        <option value="12">12 ساعة</option>
+                        <option value="24">24 ساعة</option>
+                      </select>
+                      </div>
+                      <div class="mb-3">
+                      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الحالة</label>
+                      <select #status class="custom-select mr-sm-2" id="status" name="status" formControlName="status" (change)="getSelectedValuestatus(status.value)">
+                        <option value="0">صباحا</option>
+                        <option value="1">مسائا</option>
+                      </select>
+                    </div>
+                    <button class="btn btn-outline-success btn-lg btn-block badge-pill container mb-3"
+                    type="submit" 
+                    [disabled]="!profileForm.valid || profileForm.pristine">
+                           حجز
+                     </button>
+                  </form>
+                </div>
+      </section>
 </div>

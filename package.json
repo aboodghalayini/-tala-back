@@ -29,6 +29,7 @@
     "angular-material": "^1.2.5",
     "angular-messages": "^1.8.3",
     "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
     "mdi": "^2.2.43",
     "ng-image-slider": "^7.0.0",
     "ngx-bootstrap": "^10.2.0",

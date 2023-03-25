@@ -7,4 +7,5 @@ export interface User
     Time : Number | any;
     status: string | number;
     date : string | any;
+    done : boolean | any;
 }

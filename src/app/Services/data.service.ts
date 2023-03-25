@@ -9,9 +9,6 @@ export class DataService {
 userCollection : AngularFirestoreCollection <User>;
 
   constructor(private afs: AngularFirestore) {
-  //   this.Users =  this.afs.collection('one').snapshotChanges().map( changes => {
-
-  //   })
   this.userCollection = this.afs.collection('one');
   }
   getAlluser() {
@@ -34,4 +31,17 @@ userCollection : AngularFirestoreCollection <User>;
       console.error("Error removing document: ", error);
     });
  }
+  update(user: User){
+    this.afs.collection('one').doc(user.id).update({
+      done: user.done,
+    })
+    .then(() => {
+      console.log('Document updated successfully');
+    })
+    .catch((error) => {
+      console.error('Error updating document: ', error);
+    });
+    
+
+  }
 }

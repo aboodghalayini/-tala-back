@@ -6,7 +6,8 @@ import { DataService } from 'src/app/Services/data.service';
 import { duplicateNameValidator } from 'src/app/shared/duplicateNameValidator';
 @Component({
   selector: 'app-landing',
-  templateUrl: './landing.component.html'
+  templateUrl: './landing.component.html',
+  styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
   user :User ={
@@ -17,6 +18,7 @@ export class LandingComponent implements OnInit {
     Time: '',
     date: '',
     status: '',
+    done: false,
   } ;
   users: User[] = [];
   errors: any = [];
@@ -71,10 +73,7 @@ export class LandingComponent implements OnInit {
     this.user.lastName=this.profileForm.get('lastName')?.value;
     this.user.phone=this.profileForm.get('phone')?.value;
     this.user.date=this.selectedDate;
-    console.log(this.user.date);
-    console.log(this.users[2].date);
     for (var i=0;i<this.users.length;i++){
-      console.log(i);
        if (this.user.Time == 12){
         if(this.users[i].date==this.user.date){
           if(this.users[i].status==this.user.status){
@@ -84,7 +83,7 @@ export class LandingComponent implements OnInit {
        }
       }
     }
-     else if(this.users[i].date==this.user.date){
+     if(this.users[i].date==this.user.date){
        window.confirm(" !هذا التاريخ محجوز اختر تاريخ اخر");
        this.profileForm.reset();
        return;
